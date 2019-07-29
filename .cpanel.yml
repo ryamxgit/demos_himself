@@ -1,0 +1,5 @@
+---
+deployment:
+  tasks:
+    - export DEPLOYPATH=/home2/ryamxcl/app.ryamx.cl/
+    - /bin/cp -R * $DEPLOYPATH
