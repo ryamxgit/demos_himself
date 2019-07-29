@@ -22,6 +22,6 @@ window.onload = function() {
 	var canvas = document.getElementById('sudokuZone');
 	paper.setup(canvas);
 
-	drawGridLines(4, 4, paper.view.bounds);
+	drawGridLines(9, 9, paper.view.bounds);
 	paper.view.draw();
 }
