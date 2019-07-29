@@ -54,13 +54,13 @@ window.onload = function() {
 	
 	//Box5
 	su.drawNumberTexts(6,4,4);
-	su.drawNumberTexts(5,6,4);
+	su.drawNumberTexts(5,6,5);
 	su.drawNumberTexts(2,5,6);
 	
 	//Box6
 	su.drawNumberTexts(7,8,4);
 	su.drawNumberTexts(4,7,5);
-	su.drawNumberTexts(8,9,6);
+	su.drawNumberTexts(8,8,6);
 	
 	//Box7
 	su.drawNumberTexts(3,1,7);
