@@ -3,8 +3,8 @@ var Sudoku = function() {
 	this.width_per_rectangle = 0;
 	this.height_per_rectangle = 0;
 	this.drawGridLines = function(num_rectangles_wide, num_rectangles_tall, boundingRect) {
-		this.width_per_rectangle = boundingRect.width / num_rectangles_wide;
-		this.height_per_rectangle = boundingRect.height / num_rectangles_tall;
+		this.width_per_rectangle = (boundingRect.width / num_rectangles_wide) - 2;
+		this.height_per_rectangle = (boundingRect.height / num_rectangles_tall) - 2;
 		for (var i = 0; i <= num_rectangles_wide; i++) {
 			var xPos = boundingRect.left + i * this.width_per_rectangle;
 			var topPoint = new paper.Point(xPos, boundingRect.top);
@@ -35,5 +35,49 @@ window.onload = function() {
 	su.drawGridLines(9, 9, paper.view.bounds);
 	paper.view.draw();
 	
-	su.drawNumberTexts(1,3,4);
+	//Box1
+	su.drawNumberTexts(4,1,1);
+	su.drawNumberTexts(6,3,2);
+	
+	//Box2
+	su.drawNumberTexts(1,1,4);
+	su.drawNumberTexts(3,1,5);
+	su.drawNumberTexts(4,2,6);
+	
+	//Box3
+	su.drawNumberTexts(5,1,8);
+	su.drawNumberTexts(2,2,9);
+	
+	//Box4
+	su.drawNumberTexts(5,4,2);
+	su.drawNumberTexts(8,5,2);
+	
+	//Box5
+	su.drawNumberTexts(6,4,4);
+	su.drawNumberTexts(5,5,6);
+	su.drawNumberTexts(2,6,5);
+	
+	//Box6
+	su.drawNumberTexts(7,4,8);
+	su.drawNumberTexts(4,5,7);
+	su.drawNumberTexts(8,6,9);
+	
+	//Box7
+	su.drawNumberTexts(3,7,1);
+	su.drawNumberTexts(5,7,3);
+	su.drawNumberTexts(7,8,1);
+	su.drawNumberTexts(1,9,3);
+	
+	//Box8
+	su.drawNumberTexts(8,7,4);
+	su.drawNumberTexts(7,7,5);
+	su.drawNumberTexts(3,8,4);
+	su.drawNumberTexts(4,8,5);
+	su.drawNumberTexts(5,9,5);
+	
+	//Box9
+	su.drawNumberTexts(6,7,8);
+	su.drawNumberTexts(9,7,9);
+	su.drawNumberTexts(5,8,7);
+	su.drawNumberTexts(3,9,8);
 }
