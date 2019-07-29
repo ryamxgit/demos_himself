@@ -23,7 +23,7 @@ var Sudoku = function() {
 	this.drawNumberTexts = function(num, posx, posy) {
 		var locX = (posx - 1)*this.width_per_rectangle + (this.width_per_rectangle / 2);
 		var locY = (posy - 1)*this.height_per_rectangle + (this.height_per_rectangle / 2);
-		var text = new PointText({content: num, fontSize: 12, justification: 'center', point: newPint(locX, locY)});
+		var text = new paper.PointText({content: num, fontSize: 12, justification: 'center', point: new paper.Point(locX, locY)});
 	};
 }
 
