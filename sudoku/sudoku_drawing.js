@@ -36,7 +36,6 @@ window.onload = function() {
 
 	su.drawGridLines(9, 9, 1, paper.view.bounds);
 	su.drawGridLines(3, 3, 3, paper.view.bounds);
-	paper.view.draw();
 	
 	//Box1
 	su.drawNumberTexts(4,1,1);
@@ -83,4 +82,6 @@ window.onload = function() {
 	su.drawNumberTexts(9,9,7);
 	su.drawNumberTexts(5,7,8);
 	su.drawNumberTexts(3,8,9);
+	
+	paper.view.draw();
 }
