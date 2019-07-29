@@ -2,7 +2,7 @@
 var Sudoku = function() {
 	this.width_per_rectangle = 0;
 	this.height_per_rectangle = 0;
-	this.drawGridLines = function(num_rectangles_wide, num_rectangles_tall, boundingRect) {
+	this.drawGridLines = function(num_rectangles_wide, num_rectangles_tall, stroke, boundingRect) {
 		this.width_per_rectangle = (boundingRect.width / num_rectangles_wide);
 		this.height_per_rectangle = (boundingRect.height / num_rectangles_tall);
 		for (var i = 0; i <= num_rectangles_wide; i++) {
@@ -11,6 +11,7 @@ var Sudoku = function() {
 			var bottomPoint = new paper.Point(xPos, boundingRect.bottom);
 			var aLine = new paper.Path.Line(topPoint, bottomPoint);
 			aLine.strokeColor = 'black';
+			aLine.strokeWidth = stroke;
 		}
 		for (var i = 0; i <= num_rectangles_tall; i++) {
 			var yPos = boundingRect.top + i * this.height_per_rectangle;
@@ -18,6 +19,7 @@ var Sudoku = function() {
 			var rightPoint = new paper.Point(boundingRect.right, yPos);
 			var aLine = new paper.Path.Line(leftPoint, rightPoint);
 			aLine.strokeColor = 'black';
+			aLine.strokeWidth = stroke;
 		}
 	};
 	this.drawNumberTexts = function(num, posx, posy) {
@@ -32,7 +34,8 @@ window.onload = function() {
 	paper.setup(canvas);
 	var su = new Sudoku();
 
-	su.drawGridLines(9, 9, paper.view.bounds);
+	su.drawGridLines(9, 9, 1, paper.view.bounds);
+	su.drawGridLines(3, 3, 3, paper.view.bounds);
 	paper.view.draw();
 	
 	//Box1
