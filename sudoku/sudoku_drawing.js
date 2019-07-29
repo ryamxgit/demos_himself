@@ -18,4 +18,10 @@ var drawGridLines = function(num_rectangles_wide, num_rectangles_tall, boundingR
     }
 }
 
-drawGridLines(4, 4, paper.view.bounds);
+window.onload = function() {
+	var canvas = document.getElementById('sudokuZone');
+	paper.setup(canvas);
+
+	drawGridLines(4, 4, paper.view.bounds);
+	paper.view.draw();
+}
