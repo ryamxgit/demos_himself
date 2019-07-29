@@ -37,47 +37,47 @@ window.onload = function() {
 	
 	//Box1
 	su.drawNumberTexts(4,1,1);
-	su.drawNumberTexts(6,3,2);
+	su.drawNumberTexts(6,2,3);
 	
 	//Box2
-	su.drawNumberTexts(1,1,4);
-	su.drawNumberTexts(3,1,5);
-	su.drawNumberTexts(4,2,6);
+	su.drawNumberTexts(1,4,1);
+	su.drawNumberTexts(3,5,1);
+	su.drawNumberTexts(4,6,2);
 	
 	//Box3
-	su.drawNumberTexts(5,1,8);
-	su.drawNumberTexts(2,2,9);
+	su.drawNumberTexts(5,8,1);
+	su.drawNumberTexts(2,9,2);
 	
 	//Box4
-	su.drawNumberTexts(5,4,2);
-	su.drawNumberTexts(8,5,2);
+	su.drawNumberTexts(5,2,4);
+	su.drawNumberTexts(8,2,5);
 	
 	//Box5
 	su.drawNumberTexts(6,4,4);
-	su.drawNumberTexts(5,5,6);
-	su.drawNumberTexts(2,6,5);
+	su.drawNumberTexts(5,6,4);
+	su.drawNumberTexts(2,5,6);
 	
 	//Box6
-	su.drawNumberTexts(7,4,8);
-	su.drawNumberTexts(4,5,7);
-	su.drawNumberTexts(8,6,9);
+	su.drawNumberTexts(7,8,4);
+	su.drawNumberTexts(4,7,5);
+	su.drawNumberTexts(8,9,6);
 	
 	//Box7
-	su.drawNumberTexts(3,7,1);
-	su.drawNumberTexts(5,7,3);
-	su.drawNumberTexts(7,8,1);
-	su.drawNumberTexts(1,9,3);
+	su.drawNumberTexts(3,1,7);
+	su.drawNumberTexts(5,3,7);
+	su.drawNumberTexts(7,1,8);
+	su.drawNumberTexts(1,3,9);
 	
 	//Box8
-	su.drawNumberTexts(8,7,4);
-	su.drawNumberTexts(7,7,5);
-	su.drawNumberTexts(3,8,4);
-	su.drawNumberTexts(4,8,5);
-	su.drawNumberTexts(5,9,5);
+	su.drawNumberTexts(8,4,7);
+	su.drawNumberTexts(7,5,7);
+	su.drawNumberTexts(3,4,8);
+	su.drawNumberTexts(4,5,8);
+	su.drawNumberTexts(5,5,9);
 	
 	//Box9
-	su.drawNumberTexts(6,7,8);
-	su.drawNumberTexts(9,7,9);
-	su.drawNumberTexts(5,8,7);
-	su.drawNumberTexts(3,9,8);
+	su.drawNumberTexts(6,8,7);
+	su.drawNumberTexts(9,9,7);
+	su.drawNumberTexts(5,7,8);
+	su.drawNumberTexts(3,8,9);
 }
