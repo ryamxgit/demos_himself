@@ -1,8 +1,8 @@
 
 var Sudoku = function() {
-	var width_per_rectangle = 0;
-	var height_per_rectangle = 0;
-	var drawGridLines = function(num_rectangles_wide, num_rectangles_tall, boundingRect) {
+	this.width_per_rectangle = 0;
+	this.height_per_rectangle = 0;
+	this.drawGridLines = function(num_rectangles_wide, num_rectangles_tall, boundingRect) {
 		this.width_per_rectangle = boundingRect.width / num_rectangles_wide;
 		this.height_per_rectangle = boundingRect.height / num_rectangles_tall;
 		for (var i = 0; i <= num_rectangles_wide; i++) {
@@ -19,12 +19,12 @@ var Sudoku = function() {
 			var aLine = new paper.Path.Line(leftPoint, rightPoint);
 			aLine.strokeColor = 'black';
 		}
-	}
-	var drawNumberTexts = function(num, posx, posy) {
+	};
+	this.drawNumberTexts = function(num, posx, posy) {
 		var locX = (posx - 1)*this.width_per_rectangle + (this.width_per_rectangle / 2);
 		var locY = (posy - 1)*this.height_per_rectangle + (this.height_per_rectangle / 2);
 		var text = new PointText({content: num, fontSize: 12, justification: 'center', point: newPint(locX, locY)});
-	}
+	};
 }
 
 window.onload = function() {
