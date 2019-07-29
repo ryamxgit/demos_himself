@@ -33,9 +33,9 @@ window.onload = function() {
 	var canvas = document.getElementById('sudokuZone');
 	paper.setup(canvas);
 	var su = new Sudoku();
-
-	su.drawGridLines(9, 9, 1, paper.view.bounds);
+	
 	su.drawGridLines(3, 3, 3, paper.view.bounds);
+	su.drawGridLines(9, 9, 1, paper.view.bounds);
 	
 	//Box1
 	su.drawNumberTexts(4,1,1);
