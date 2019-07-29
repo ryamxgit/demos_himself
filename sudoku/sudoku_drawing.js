@@ -3,8 +3,8 @@ var Sudoku = function() {
 	this.width_per_rectangle = 0;
 	this.height_per_rectangle = 0;
 	this.drawGridLines = function(num_rectangles_wide, num_rectangles_tall, boundingRect) {
-		this.width_per_rectangle = (boundingRect.width / num_rectangles_wide) - 2;
-		this.height_per_rectangle = (boundingRect.height / num_rectangles_tall) - 2;
+		this.width_per_rectangle = (boundingRect.width / num_rectangles_wide);
+		this.height_per_rectangle = (boundingRect.height / num_rectangles_tall);
 		for (var i = 0; i <= num_rectangles_wide; i++) {
 			var xPos = boundingRect.left + i * this.width_per_rectangle;
 			var topPoint = new paper.Point(xPos, boundingRect.top);
