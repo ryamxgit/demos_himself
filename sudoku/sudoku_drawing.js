@@ -62,7 +62,7 @@ var Sudoku = function() {
 			var numArb = this.getRandomInt(1,10);
 			var position = this.getRandPosition();
 			if(this.asignVoidError(numArb, position)) {
-				this.putNumberW(numArb, pos.x, pos.y);
+				this.putNumberW(numArb, position.x, position.y);
 				i++;
 			}
 		}
