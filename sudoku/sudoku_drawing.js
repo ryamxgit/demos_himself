@@ -29,12 +29,45 @@ var Sudoku = function() {
 		var locY = (posy - 1)*this.height_per_rectangle + (this.height_per_rectangle / 2);
 		var t = new paper.PointText({content: num, fontSize: 12, justification: 'center', point: new paper.Point(locX, locY)});
 	};
+	this.putNumberW = function(num, posx, posy) {
+		var locX = (posx - 1)*this.width_per_rectangle + (this.width_per_rectangle / 2);
+		var locY = (posy - 1)*this.height_per_rectangle + (this.height_per_rectangle / 2);
+		var t = new paper.PointText({content: num, fontSize: 12, justification: 'center', point: new paper.Point(locX, locY)});
+	};
 	this.initBoard = function() {
 		for (var i=0; i<9; i++) {
 			for (var j=0; j<9; j++) {
 				this.boardTable[i+1, j+1] = 0;
 			}
 		}
+		
+	};
+	this.asignVoidError = function(num, pos) {
+		if(this.boardTable[pos.x,pos.y] == 0) {
+			this.boardTable[pos.x,pos.y] = num;
+			return true;
+		} else {
+			return false;
+		}
+	};
+	this.getRandomInt = function(min, max) {
+		return Math.floor(Math.random() * (max - min)) + min;
+	};
+	this.getRandPosition = function() {
+		var pos = this.getRandomInt(1,82);
+		return {'x':Math.floor(pos / 9), 'y':(pos % 9)};
+	}
+	this.randomFilledTable = function() {
+		for (var i=0; i<27;) {
+			var numArb = this.getRandomInt(1,10);
+			var position = this.getRandPosition();
+			if(this.asignVoidError(numArb, position)) {
+				this.putNumberW(numArb, pos.x, pos.y);
+				i++;
+			}
+		}
+	};
+	this.staticFilledTable = function() {
 		//Box1
 		this.putNumber(4,1,1);
 		this.putNumber(6,2,3);
@@ -92,6 +125,7 @@ window.onload = function() {
 	su.drawGridLines(9, 9, 1, paper.view.bounds);
 	
 	su.initBoard();
+	su.randomFilledTable();
 	
 	paper.view.draw();
 }
