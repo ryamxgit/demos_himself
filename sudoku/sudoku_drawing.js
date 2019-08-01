@@ -32,7 +32,7 @@ var Sudoku = function() {
 	this.initBoard = function() {
 		for (var i=0; i<9; i++) {
 			for (var j=0; j<9; j++) {
-				this.boardTable[i, j] = 0;
+				this.boardTable[i+1, j+1] = 0;
 			}
 		}
 		//Box1
