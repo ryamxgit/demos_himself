@@ -2,6 +2,7 @@
 var Sudoku = function() {
 	this.width_per_rectangle = 0;
 	this.height_per_rectangle = 0;
+	this.currentRow = 0;
 	this.boardTable = [];
 	this.drawGridLines = function(num_rectangles_wide, num_rectangles_tall, stroke, boundingRect) {
 		this.width_per_rectangle = (boundingRect.width / num_rectangles_wide);
@@ -54,10 +55,25 @@ var Sudoku = function() {
 		return Math.floor(Math.random() * (max - min)) + min;
 	};
 	this.getRandPosition = function() {
-		var pos = this.getRandomInt(1,82);
-		return {'x':(pos % 9)+1, 'y':Math.floor(pos / 9)};
+		var findVoid = false;
+		var colPos = this.getRandomInt(1,10);
+		while(!findVoid) {
+			if(this.boardTable[colPos,this.currentRow] == 0)
+				findVoid = true;
+			else {
+				this.currentRow++;
+				if(this.currentRow == 10) {
+					this.currentRow = 1;
+					colPos++;
+					if(colPos == 10)
+						colPos = 1;
+				}
+			}
+		}
+		return {'x':colPos, 'y':this.currentRow};
 	};
 	this.randomFilledTable = function() {
+		this.currentRow = 1;
 		for (var i=0; i<27;) {
 			console.log('Intentando obtener numero de vez:'+i);
 			var numArb = this.getRandomInt(1,10);
