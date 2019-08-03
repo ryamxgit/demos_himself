@@ -74,7 +74,7 @@ var Sudoku = function() {
 		return {'x':colPos, 'y':this.currentRow};
 	};
 	this.randomFilledTable = function() {
-		for (var i=0; i<14;) {
+		for (var i=0; i<12;) {
 			console.log('Intentando obtener numero de vez:'+i);
 			var numArb = this.getRandomInt(1,10);
 			var position = this.getRandPosition();
