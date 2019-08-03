@@ -145,6 +145,22 @@ var Sudoku = function() {
 			}
 		}
 	};
+	this.resolveBoard = function() {
+		for (var i=0; i<9; i++) {
+			for (var j=0; j<9; j++) {
+				if(this.boardTable[i+1][j+1] == 0) {
+					ciclo = true;
+					while(ciclo) {
+						var numArb = this.getRandomInt(1,10);
+						if(this.asignUniqNumber(numArb, {'x':i+1,'y':j+1})) {
+							this.putNumberW(numArb, position.x, position.y);
+							ciclo = false;
+						}
+					}
+				}
+			}
+		}
+	};
 	this.staticFilledTable = function() {
 		//Box1
 		this.putNumber(4,1,1);
@@ -214,5 +230,6 @@ window.onload = function() {
 	paper.view.draw();
 	
 	addEvent(document.getElementById('Init'), 'click', function() { su.randomFilledTable(); });
+	addEvent(document.getElementById('Resolve'), 'click', function() { su.resolveBoard(); });
 }
 
