@@ -152,7 +152,8 @@ var Sudoku = function() {
 					ciclo = true;
 					while(ciclo) {
 						var numArb = this.getRandomInt(1,10);
-						if(this.asignUniqNumber(numArb, {'x':i+1,'y':j+1})) {
+						position = {'x':i+1,'y':j+1};
+						if(this.asignUniqNumber(numArb, position)) {
 							this.putNumberW(numArb, position.x, position.y);
 							ciclo = false;
 						}
