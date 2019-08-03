@@ -57,6 +57,7 @@ var Sudoku = function() {
 	this.getRandPosition = function() {
 		var findVoid = false;
 		var colPos = this.getRandomInt(1,10);
+		this.currentRow = 1;
 		while(!findVoid) {
 			if(this.boardTable[colPos,this.currentRow] == 0)
 				findVoid = true;
@@ -73,7 +74,6 @@ var Sudoku = function() {
 		return {'x':colPos, 'y':this.currentRow};
 	};
 	this.randomFilledTable = function() {
-		this.currentRow = 1;
 		for (var i=0; i<9;) {
 			console.log('Intentando obtener numero de vez:'+i);
 			var numArb = this.getRandomInt(1,10);
