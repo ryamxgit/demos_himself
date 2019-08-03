@@ -25,7 +25,7 @@ var Sudoku = function() {
 		}
 	};
 	this.putNumber = function(num, posx, posy) {
-		this.boardTable[posx, posy] = num;
+		this.boardTable[posx][posy] = num;
 		var locX = (posx - 1)*this.width_per_rectangle + (this.width_per_rectangle / 2);
 		var locY = (posy - 1)*this.height_per_rectangle + (this.height_per_rectangle / 2);
 		var t = new paper.PointText({content: num, fontSize: 12, justification: 'center', point: new paper.Point(locX, locY)});
@@ -38,14 +38,14 @@ var Sudoku = function() {
 	this.initBoard = function() {
 		for (var i=0; i<9; i++) {
 			for (var j=0; j<9; j++) {
-				this.boardTable[i+1, j+1] = 0;
+				this.boardTable[i+1][j+1] = 0;
 			}
 		}
 		
 	};
 	this.asignVoidError = function(num, pos) {
-		if(this.boardTable[pos.x,pos.y] == 0) {
-			this.boardTable[pos.x,pos.y] = num;
+		if(this.boardTable[pos.x][pos.y] == 0) {
+			this.boardTable[pos.x][pos.y] = num;
 			return true;
 		} else {
 			return false;
@@ -59,7 +59,7 @@ var Sudoku = function() {
 		var colPos = this.getRandomInt(1,10);
 		this.currentRow = 1;
 		while(!findVoid) {
-			if(this.boardTable[colPos,this.currentRow] == 0)
+			if(this.boardTable[colPos][this.currentRow] == 0)
 				findVoid = true;
 			else {
 				this.currentRow++;
@@ -74,7 +74,7 @@ var Sudoku = function() {
 		return {'x':colPos, 'y':this.currentRow};
 	};
 	this.randomFilledTable = function() {
-		for (var i=0; i<12;) {
+		for (var i=0; i<27;) {
 			console.log('Intentando obtener numero de vez:'+i);
 			var numArb = this.getRandomInt(1,10);
 			var position = this.getRandPosition();
