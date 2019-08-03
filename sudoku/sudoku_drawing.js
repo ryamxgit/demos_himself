@@ -152,6 +152,6 @@ window.onload = function() {
 	
 	paper.view.draw();
 	
-	addEvent(window, 'Init', function() { su.randomFilledTable(); });
+	addEvent(document.getElementById('Init'), 'click', function() { su.randomFilledTable(); });
 }
 
