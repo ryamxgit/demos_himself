@@ -142,7 +142,11 @@ window.onload = function() {
 	su.drawGridLines(9, 9, 1, paper.view.bounds);
 	
 	su.initBoard();
-	su.randomFilledTable();
 	
 	paper.view.draw();
+	
+	$('Init').onclick(function() {
+						su.randomFilledTable();
+				});
 }
+
