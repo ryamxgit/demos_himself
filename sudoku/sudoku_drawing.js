@@ -36,6 +36,9 @@ var Sudoku = function() {
 		var t = new paper.PointText({content: num, fontSize: 12, justification: 'center', point: new paper.Point(locX, locY)});
 	};
 	this.initBoard = function() {
+		for (var i=1;i<10;i++) {
+			this.boardTable[i] = [];
+		}
 		for (var i=0; i<9; i++) {
 			for (var j=0; j<9; j++) {
 				this.boardTable[i+1][j+1] = 0;
