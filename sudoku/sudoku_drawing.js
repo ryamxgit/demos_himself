@@ -48,8 +48,72 @@ var Sudoku = function() {
 		}
 		
 	};
-	this.asignVoidError = function(num, pos) {
+	
+	this.cornerSquare = function(pos) {
+		if(pos.x < 4) {
+			if(pos.y < 4) {
+				return {'x':1, 'y':1};
+			}
+			if(pos.y < 7) {
+				return {'x':1, 'y':4};
+			} else {
+				return {'x':1, 'y':7};
+			}
+		}
+		if(pos.x < 7) {
+			if(pos.y < 4) {
+				return {'x':4, 'y':1};
+			}
+			if(pos.y < 7) {
+				return {'x':4, 'y':4};
+			} else {
+				return {'x':4, 'y':7};
+			}
+		} else {
+			if(pos.y < 4) {
+				return {'x':7, 'y':1};
+			}
+			if(pos.y < 7) {
+				return {'x':7, 'y':4};
+			} else {
+				return {'x':7, 'y':7};
+			}
+		}
+	};
+	this.uniqRows = function(num,pos) {
+		for(i=1;i<=9;i++) {
+			if(this.boardTable[i][pos.y] == num)
+				return false;
+		}
+		return true;
+	};
+	this.uniqCols = function(num,pos) {
+		for(i=1;i<=9;i++) {
+			if(this.boardTable[pos.x][i] == num)
+				return false;
+		}
+		return true;
+	};
+	this.uniqSquare = function(num,pos) {
+		var cornerSq = this.cornerSquare(pos);
+		for(i=0;i<3;i++) {
+			for(j=0;j<3;j++) {
+				if(this.boardTable[cornerSq.x+i][cornerSq.y+j] == num)
+					return false;
+			}
+		}
+		return true;
+	};
+	this.asignUniqNumber = function(num, pos) {
 		if(this.boardTable[pos.x][pos.y] == 0) {
+			if(this.howManyItems > 0) {
+				if(!this.uniqRows(num,pos))//same Row
+					return false;
+				if(!this.uniqCols(num,pos))//same Col
+					return false;
+				if(!this.uniqSquare(num,pos))//same Square
+					return false;
+			}
 			this.boardTable[pos.x][pos.y] = num;
 			this.howManyItems++;
 			return true;
@@ -75,7 +139,7 @@ var Sudoku = function() {
 			console.log('Intentando obtener numero de vez:'+i);
 			var numArb = this.getRandomInt(1,10);
 			var position = this.getRandPosition();
-			if(this.asignVoidError(numArb, position)) {
+			if(this.asignUniqNumber(numArb, position)) {
 				this.putNumberW(numArb, position.x, position.y);
 				i++;
 			}
