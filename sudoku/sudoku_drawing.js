@@ -161,6 +161,7 @@ var Sudoku = function() {
 				}
 			}
 		}
+		paper.view.draw();
 	};
 	this.staticFilledTable = function() {
 		//Box1
