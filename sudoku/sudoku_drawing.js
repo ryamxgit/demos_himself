@@ -5,6 +5,8 @@ var Sudoku = function() {
 	this.currentRow = 0;
 	this.boardTable = [];
 	this.howManyItems = 0;
+	this.errorUnresolved = false;
+	
 	this.drawGridLines = function(num_rectangles_wide, num_rectangles_tall, stroke, boundingRect) {
 		this.width_per_rectangle = (boundingRect.width / num_rectangles_wide);
 		this.height_per_rectangle = (boundingRect.height / num_rectangles_tall);
@@ -150,12 +152,25 @@ var Sudoku = function() {
 			for (var j=0; j<9; j++) {
 				if(this.boardTable[i+1][j+1] == 0) {
 					ciclo = true;
+					var numArb = this.getRandomInt(1,10);
+					var initialNumber = numArb;
 					while(ciclo) {
-						var numArb = this.getRandomInt(1,10);
 						position = {'x':i+1,'y':j+1};
 						if(this.asignUniqNumber(numArb, position)) {
 							this.putNumberW(numArb, position.x, position.y);
 							ciclo = false;
+						} else {
+							numArb++;
+							if(numArb == 10) {
+								numArb = 1;
+							}
+							if(numArb == initialNumber) {
+								this.errorUnresolved = true;
+								paper.view.draw();
+								alert('Lo sentimos, este Sudoku no tiene solucion');
+								return false;
+							}
+								
 						}
 					}
 				}
