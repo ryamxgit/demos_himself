@@ -133,6 +133,13 @@ var Sudoku = function() {
 	};
 }
 
+function addEvent(obj, type, fn) {
+        if (obj.addEventListener)
+                obj.addEventListener(type, fn, false);
+        else if (obj.attachEvent)
+                obj.attachEvent('on' + type, function() { return fn.apply(obj, [window.event]);});
+}
+
 window.onload = function() {
 	var canvas = document.getElementById('sudokuZone');
 	paper.setup(canvas);
@@ -145,8 +152,6 @@ window.onload = function() {
 	
 	paper.view.draw();
 	
-	$('Init').onclick(function() {
-						su.randomFilledTable();
-				});
+	addEvent(window, 'Init', function() { su.randomFilledTable(); });
 }
 
