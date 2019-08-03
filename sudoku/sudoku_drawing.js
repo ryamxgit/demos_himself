@@ -56,7 +56,7 @@ var Sudoku = function() {
 	this.getRandPosition = function() {
 		var pos = this.getRandomInt(1,82);
 		return {'x':(pos % 9)+1, 'y':Math.floor(pos / 9)};
-	}
+	};
 	this.randomFilledTable = function() {
 		for (var i=0; i<27;) {
 			console.log('Intentando obtener numero de vez:'+i);
