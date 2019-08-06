@@ -175,25 +175,26 @@ var Sudoku = function() {
 		var solutions = [];
 		var countSolutions = 81 - this.howManyItems;
 		for (var i=0;i<countSolutions;i++) {
-			solutions[i] = [];
+			solutions[i] = {};
 		}
 		var solInd = 0;
 		for (var i=0; i<9; i++) {
 			for (var j=0; j<9; j++) {
 				position = {'x':(i+1), 'y':(j+1)};
 				if(this.boardTable[i+1][j+1] == 0) {
-					solutions[solInd] = new Array('position' => position, 'values' => []);
+					solutions[solInd] = {'position' => position, 'values' => []};
 					for(s=1;s<=9;s++) {
 						if(this.testingUniqNumber(s, position)) {
-							solutions[solInd]['values'][] = s;
+							solutions[solInd].values[] = s;
 						}
 					}
+					solInd++;
 				}
 			}
 		}
 		for(var i in solutions) {
-			if(solutions[i]['values'].length == 1) {
-				if(!this.asignUniqNumber(solutions[i]['values'][0], solutions[i]['position'])) {
+			if(solutions[i].values.length == 1) {
+				if(!this.asignUniqNumber(solutions[i].values[0], solutions[i].position)) {
 					alert('Se produjo alguna clase de error no esperado');
 					return false;
 				}
