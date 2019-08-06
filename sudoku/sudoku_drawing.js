@@ -206,6 +206,54 @@ var Sudoku = function() {
 	};
 	this.staticFilledTable = function() {
 		this.initBoard();
+		this.putNumber(8,3,1);
+		this.putNumber(3,1,2);
+		this.putNumber(4,2,2);
+		this.putNumber(2,3,2);
+		this.putNumber(1,1,3);
+		this.putNumber(9,2,3);
+		this.putNumber(7,3,3);
+		//Box2
+		this.putNumber(2,4,1);
+		this.putNumber(9,5,2);
+		this.putNumber(8,6,2);
+		//Box3
+		this.putNumber(9,7,1);
+		this.putNumber(3,9,1);
+		this.putNumber(7,9,2);
+		this.putNumber(4,9,3);
+		//Box4
+		this.putNumber(5,3,4);
+		this.putNumber(2,1,6);
+		//Box5
+		this.putNumber(3,4,4);
+		this.putNumber(1,5,4);
+		this.putNumber(2,6,4);
+		this.putNumber(7,5,6);
+		this.putNumber(4,6,6);
+		//Box6
+		this.putNumber(4,7,4);
+		this.putNumber(7,8,4);
+		this.putNumber(9,9,4);
+		this.putNumber(5,7,6);
+		//Box7
+		this.putNumber(2,2,7);
+		this.putNumber(7,2,8);
+		this.putNumber(8,1,9);
+		//Box8
+		this.putNumber(1,6,7);
+		this.putNumber(6,6,8);
+		this.putNumber(4,4,9);
+		this.putNumber(3,5,9);
+		//Box9
+		this.putNumber(5,9,7);
+		this.putNumber(8,7,8);
+		this.putNumber(9,8,8);
+		this.putNumber(1,9,8);
+		this.putNumber(7,7,9);
+		this.putNumber(6,9,9);
+		return;
+		
 		//Box1
 		this.putNumber(4,1,1);
 		this.putNumber(6,2,3);
