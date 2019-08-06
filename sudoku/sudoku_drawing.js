@@ -182,7 +182,7 @@ var Sudoku = function() {
 			for (var j=0; j<9; j++) {
 				position = {'x':(i+1), 'y':(j+1)};
 				if(this.boardTable[i+1][j+1] == 0) {
-					solutions[solInd] = {'position' => position, 'values' => []};
+					solutions[solInd] = {'position': position, 'values': []};
 					for(s=1;s<=9;s++) {
 						if(this.testingUniqNumber(s, position)) {
 							solutions[solInd].values[] = s;
