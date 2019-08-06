@@ -106,6 +106,20 @@ var Sudoku = function() {
 		}
 		return true;
 	};
+	this.testingUniqNumber = function(num, pos) {
+		if(this.boardTable[pos.x][pos.y] == 0) {			
+			if(!this.uniqRows(num,pos))//same Row
+				return false;
+			if(!this.uniqCols(num,pos))//same Col
+				return false;
+			if(!this.uniqSquare(num,pos))//same Square
+				return false;
+				
+			return true;
+		} else {
+			return false;
+		}
+	};
 	this.asignUniqNumber = function(num, pos) {
 		if(this.boardTable[pos.x][pos.y] == 0) {
 			if(this.howManyItems > 0) {
@@ -148,37 +162,46 @@ var Sudoku = function() {
 		}
 	};
 	this.resolveBoard = function() {
+		var veces = 1;
+		while(veces < 100) {
+			this.resolve();
+			veces++;
+		}
+		if(this.howManyItems < 81) {
+			alert('No pudo resolver sudoku mediante Backtrack');
+		}
+	};
+	this.resolve = function() {
+		var solutions = [];
+		var countSolutions = 81 - this.howManyItems;
+		for (var i=0;i<countSolutions;i++) {
+			solutions[i] = [];
+		}
+		var solInd = 0;
 		for (var i=0; i<9; i++) {
 			for (var j=0; j<9; j++) {
+				position = {'x':(i+1), 'y':(j+1)};
 				if(this.boardTable[i+1][j+1] == 0) {
-					ciclo = true;
-					var numArb = this.getRandomInt(1,10);
-					var initialNumber = numArb;
-					while(ciclo) {
-						position = {'x':i+1,'y':j+1};
-						if(this.asignUniqNumber(numArb, position)) {
-							this.putNumberW(numArb, position.x, position.y);
-							ciclo = false;
-						} else {
-							numArb++;
-							if(numArb == 10) {
-								numArb = 1;
-							}
-							if(numArb == initialNumber) {
-								this.errorUnresolved = true;
-								paper.view.draw();
-								alert('Lo sentimos, este Sudoku no tiene solucion');
-								return false;
-							}
-								
+					solutions[solInd] = new Array('position' => position, 'values' => []);
+					for(s=1;s<=9;s++) {
+						if(this.testingUniqNumber(s, position)) {
+							solutions[solInd]['values'][] = s;
 						}
 					}
 				}
 			}
 		}
-		paper.view.draw();
+		for(var i in solutions) {
+			if(solutions[i]['values'].length == 1) {
+				if(!this.asignUniqNumber(solutions[i]['values'][0], solutions[i]['position'])) {
+					alert('Se produjo alguna clase de error no esperado');
+					return false;
+				}
+			}
+		}
 	};
 	this.staticFilledTable = function() {
+		this.initBoard();
 		//Box1
 		this.putNumber(4,1,1);
 		this.putNumber(6,2,3);
