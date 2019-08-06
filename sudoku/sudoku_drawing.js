@@ -185,7 +185,7 @@ var Sudoku = function() {
 					solutions[solInd] = {'position': position, 'values': []};
 					for(s=1;s<=9;s++) {
 						if(this.testingUniqNumber(s, position)) {
-							solutions[solInd].values[] = s;
+							solutions[solInd].values.push(s);
 						}
 					}
 					solInd++;
