@@ -197,9 +197,12 @@ var Sudoku = function() {
 				if(!this.asignUniqNumber(solutions[i].values[0], solutions[i].position)) {
 					alert('Se produjo alguna clase de error no esperado');
 					return false;
+				} else {
+					this.putNumberW(solutions[i].values[0], solutions[i].position.x, solutions[i].position.y);
 				}
 			}
 		}
+		paper.view.draw();
 	};
 	this.staticFilledTable = function() {
 		this.initBoard();
