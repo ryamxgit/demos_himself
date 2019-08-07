@@ -314,10 +314,6 @@ function addEvent(obj, type, fn) {
                 obj.attachEvent('on' + type, function() { return fn.apply(obj, [window.event]);});
 }
 
-function onMouseDown(event) {
-	su.whichBox(event.point);
-}
-
 var su = new Sudoku();
 
 window.onload = function() {
@@ -334,5 +330,9 @@ window.onload = function() {
 	addEvent(document.getElementById('Init'), 'click', function() { su.randomFilledTable(); });
 	addEvent(document.getElementById('Resolve'), 'click', function() { su.resolveBoard(); });
 	addEvent(document.getElementById('Static'), 'click', function() { su.staticFilledTable(); });
+	
+	function onMouseDown(event) {
+		su.whichBox(event.point);
+	}
 }
 
