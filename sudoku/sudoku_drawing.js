@@ -342,7 +342,7 @@ window.onload = function() {
 		} else {
 			var pos = su.whichBox(event.point);
 			var number = parseInt(prompt("Numero del 1 al 9:", ""));
-			if(number > 0 and number < 10) {
+			if(number > 0 && number < 10) {
 				if(su.asignUniqNumber(number, pos)) {
 					su.putNumberW(number, pos.x, pos.y);
 				} else {
