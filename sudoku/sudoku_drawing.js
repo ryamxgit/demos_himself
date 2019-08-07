@@ -207,6 +207,8 @@ var Sudoku = function() {
 					return true;
 				}
 			}
+		}
+		for(var i in solutions) {
 			if(solutions[i].values.length == 2) {
 				for(opt in solutions[i].values) {
 					if(this.asignUniqNumber(opt, solutions[i].position)) {
