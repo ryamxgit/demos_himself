@@ -27,6 +27,11 @@ var Sudoku = function() {
 			aLine.strokeWidth = stroke;
 		}
 	};
+	this.whichBox = function(whatPoint) {
+		var left = Math.floor(whatPoint.x / this.width_per_rectangle);
+		var top = Math.floor(whatPoint.y / this.height_per_rectangle);
+		console.log('Box in mouse is:'+left+'x'+top);
+	}
 	this.putNumber = function(num, posx, posy) {
 		this.boardTable[posx][posy] = num;
 		this.howManyItems++;
@@ -309,10 +314,15 @@ function addEvent(obj, type, fn) {
                 obj.attachEvent('on' + type, function() { return fn.apply(obj, [window.event]);});
 }
 
+function onMouseDown(event) {
+	su.whichBox(event.point);
+}
+
+var su = new Sudoku();
+
 window.onload = function() {
 	var canvas = document.getElementById('sudokuZone');
 	paper.setup(canvas);
-	var su = new Sudoku();
 	
 	su.drawGridLines(3, 3, 3, paper.view.bounds);
 	su.drawGridLines(9, 9, 1, paper.view.bounds);
