@@ -6,6 +6,7 @@ var Sudoku = function() {
 	this.boardTable = [];
 	this.howManyItems = 0;
 	this.errorUnresolved = false;
+	this.staticFilled = false;
 	
 	this.drawGridLines = function(num_rectangles_wide, num_rectangles_tall, stroke, boundingRect) {
 		this.width_per_rectangle = (boundingRect.width / num_rectangles_wide);
@@ -28,9 +29,9 @@ var Sudoku = function() {
 		}
 	};
 	this.whichBox = function(whatPoint) {
-		var left = Math.floor(whatPoint.x / this.width_per_rectangle);
-		var top = Math.floor(whatPoint.y / this.height_per_rectangle);
-		console.log('Box in mouse is:'+left+'x'+top);
+		var left = 1 + Math.floor(whatPoint.x / this.width_per_rectangle);
+		var top = 1 + Math.floor(whatPoint.y / this.height_per_rectangle);
+		return {'x':left, 'y': top};
 	}
 	this.putNumber = function(num, posx, posy) {
 		this.boardTable[posx][posy] = num;
@@ -210,6 +211,7 @@ var Sudoku = function() {
 		paper.view.draw();
 	};
 	this.staticFilledTable = function() {
+		this.staticFilled = true;
 		this.initBoard();
 		this.putNumber(8,3,1);
 		this.putNumber(3,1,2);
@@ -335,6 +337,20 @@ window.onload = function() {
 	addEvent(document.getElementById('Static'), 'click', function() { su.staticFilledTable(); });
 	*/
 	tool.onMouseDown = function(event) {
-		su.whichBox(event.point);
+		if(su.staticFilled) {
+			alert('No puede agregar numeros cuando se ha llenado estaticamente');
+		} else {
+			var pos = su.whichBox(event.point);
+			var number = parseInt(prompt("Numero del 1 al 9:", ""));
+			if(number > 0 and number < 10) {
+				if(su.asignUniqNumber(number, pos)) {
+					su.putNumberW(number, pos.x, pos.y);
+				} else {
+					alert('Esta repetido en fila, columna o bloque local');
+				}
+			} else {
+				alert('No introdujo un numero valido');
+			}
+		}
 	}
 }
