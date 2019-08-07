@@ -331,8 +331,8 @@ window.onload = function() {
 	addEvent(document.getElementById('Resolve'), 'click', function() { su.resolveBoard(); });
 	addEvent(document.getElementById('Static'), 'click', function() { su.staticFilledTable(); });
 	
-	function onMouseDown(event) {
-		su.whichBox(event.point);
-	}
 }
 
+function onMouseDown(event) {
+		su.whichBox(event.point);
+}
