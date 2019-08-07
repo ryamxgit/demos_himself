@@ -319,6 +319,8 @@ var su = new Sudoku();
 window.onload = function() {
 	var canvas = document.getElementById('sudokuZone');
 	paper.setup(canvas);
+	var tool = new paper.Tool();
+	tool.activate();
 	
 	su.drawGridLines(3, 3, 3, paper.view.bounds);
 	su.drawGridLines(9, 9, 1, paper.view.bounds);
@@ -332,8 +334,7 @@ window.onload = function() {
 	addEvent(document.getElementById('Resolve'), 'click', function() { su.resolveBoard(); });
 	addEvent(document.getElementById('Static'), 'click', function() { su.staticFilledTable(); });
 	*/
-}
-
-function onMouseDown(event) {
+	tool.onMouseDown = function(event) {
 		su.whichBox(event.point);
+	}
 }
