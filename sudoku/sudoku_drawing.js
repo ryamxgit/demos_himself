@@ -201,14 +201,25 @@ var Sudoku = function() {
 		for(var i in solutions) {
 			if(solutions[i].values.length == 1) {
 				if(!this.asignUniqNumber(solutions[i].values[0], solutions[i].position)) {
-					alert('Se produjo alguna clase de error no esperado');
 					return false;
 				} else {
 					this.putNumberW(solutions[i].values[0], solutions[i].position.x, solutions[i].position.y);
+					return true;
+				}
+			}
+			if(solutions[i].values.length == 2) {
+				for(opt in solutions[i].values) {
+					if(this.asignUniqNumber(opt, solutions[i].position)) {
+						this.putNumberW(opt, solutions[i].position.x, solutions[i].position.y);
+						if(!this.resolve())
+							continue;
+						else
+							break;
+					}
 				}
 			}
 		}
-		paper.view.draw();
+		return false;
 	};
 	this.staticFilledTable = function() {
 		this.staticFilled = true;
