@@ -8,6 +8,16 @@ var Sudoku = function() {
 	this.errorUnresolved = false;
 	this.staticFilled = false;
 	
+	this.resetCanvas = function() {
+		var bR = document.getElementById('sudokuZone');
+		var squa = new paper.Rectangle(0,0,bR.width,bR.height);
+		squa.fillColor = '#fff';
+		this.drawGridLines(3, 3, 3, paper.view.bounds);
+		this.drawGridLines(9, 9, 1, paper.view.bounds);
+		this.howManyItems = 0;
+		this.initBoard();
+		this.staticFilled = false;
+	};
 	this.drawGridLines = function(num_rectangles_wide, num_rectangles_tall, stroke, boundingRect) {
 		this.width_per_rectangle = (boundingRect.width / num_rectangles_wide);
 		this.height_per_rectangle = (boundingRect.height / num_rectangles_tall);
