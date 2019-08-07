@@ -327,10 +327,11 @@ window.onload = function() {
 	
 	paper.view.draw();
 	
+	/*
 	addEvent(document.getElementById('Init'), 'click', function() { su.randomFilledTable(); });
 	addEvent(document.getElementById('Resolve'), 'click', function() { su.resolveBoard(); });
 	addEvent(document.getElementById('Static'), 'click', function() { su.staticFilledTable(); });
-	
+	*/
 }
 
 function onMouseDown(event) {

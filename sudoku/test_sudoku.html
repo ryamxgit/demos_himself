@@ -13,8 +13,11 @@ canvas {
 <body>
 	<div><p>Prueba de Canvas</p></div>
 	<canvas id="sudokuZone"></canvas>
-	<div><input type="button" value="Estatico" id="Static" />
-	<input type="button" value="Iniciar" id="Init" /><input type="button" value="Resolver" id="Resolve" /></div>
+	<div>
+	<input type="button" value="Estatico" id="Static" onclick="su.staticFilledTable()" />
+	<input type="button" value="Iniciar" id="Init" onclick="su.randomFilledTable()" />
+	<input type="button" value="Resolver" id="Resolve" onclick="su.resolveBoard()" />
+	</div>
 <script src="/sudoku/sudoku_drawing.js"></script>
 </body>
 </html>
