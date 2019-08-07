@@ -352,6 +352,10 @@ window.onload = function() {
 	tool.onMouseDown = function(event) {
 		if(su.staticFilled) {
 			alert('No puede agregar numeros cuando se ha llenado estaticamente');
+			return;
+		}
+		if(su.howManyItems == 81) {
+			alert('Sudoku ya fue resuelto, muchas gracias (F5 para reiniciar)');
 		} else {
 			var pos = su.whichBox(event.point);
 			var number = parseInt(prompt("Numero del 1 al 9:", ""));
