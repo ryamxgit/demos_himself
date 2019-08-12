@@ -189,8 +189,10 @@ var Sudoku = function() {
 			}
 			if(this.howManyItems < 81) {
 				console.log('No pudo resolver board '+veces);
+				this.resetCanvas();
 			} else {
 				console.log('Un tablero encontrado!');
+				veces = 10000;
 			}
 			veces++;
 		}
