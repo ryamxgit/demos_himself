@@ -178,6 +178,23 @@ var Sudoku = function() {
 			}
 		}
 	};
+	this.searchValidBoard = function() {
+		var veces = 1;
+		while(veces < 10000) {
+			this.randomFilledTable();
+			var flow = 1;
+			while(flow < 100) {
+				this.resolve();
+				flow++;
+			}
+			if(this.howManyItems < 81) {
+				console.log('No pudo resolver board '+veces);
+			} else {
+				console.log('Un tablero encontrado!');
+			}
+			veces++;
+		}
+	};
 	this.resolveBoard = function() {
 		var veces = 1;
 		while(veces < 100) {
