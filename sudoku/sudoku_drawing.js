@@ -165,8 +165,9 @@ var Sudoku = function() {
 		return {'x':colPos, 'y':rowPos};
 	};
 	this.randomFilledTable = function() {
+		this.setMsg('Numeros aleatorios iniciales...');
 		if(this.howManyItems > 20) {
-			alert('No quedan mas posiciones aleatorias');
+			// alert('No quedan mas posiciones aleatorias');
 			return;
 		}
 		for (var i=0; i<27;) {
@@ -177,25 +178,23 @@ var Sudoku = function() {
 				i++;
 			}
 		}
-		this.setMsg('Numeros aleatorios iniciales...');
 	};
 	this.searchValidBoard = async function() {
 		var veces = 1;
 		while(veces < 10000) {
 			this.randomFilledTable();
+			await sleep(200);
 			var flow = 1;
 			while(flow < 100) {
 				this.resolve();
 				flow++;
 			}
 			if(this.howManyItems < 81) {
-				console.log('No pudo resolver board '+veces);
-				this.setMsg('Tablero no es valido');
+				this.setMsg('Prueba '+veces+' no es sudoku valido');
 				await sleep(500);
 				this.resetCanvas();
 			} else {
-				console.log('Un tablero encontrado!');
-				this.setMsg('Un tablero fue encontrado!');
+				this.setMsg('Un tablero fue encontrado en intento '+veces+'!');
 				veces = 10000;
 			}
 			veces++;
