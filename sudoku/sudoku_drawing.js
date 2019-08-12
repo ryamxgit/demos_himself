@@ -8,6 +8,7 @@ var Sudoku = function() {
 	this.errorUnresolved = false;
 	this.staticFilled = false;
 	
+	
 	this.resetCanvas = function() {
 		// Canvas reset (init of every cycle)
 		var bR = document.getElementById('sudokuZone');
