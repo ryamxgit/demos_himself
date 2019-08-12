@@ -11,7 +11,7 @@ var Sudoku = function() {
 	this.resetCanvas = function() {
 		// Canvas reset (init of every cycle)
 		var bR = document.getElementById('sudokuZone');
-		var square = new paper.Path.Rectangle({rectangle: view.bounds, fillColor: 'white'});
+		var square = new paper.Path.Rectangle({rectangle: paper.view.bounds, fillColor: 'white'});
 		this.drawGridLines(3, 3, 3, paper.view.bounds);
 		this.drawGridLines(9, 9, 1, paper.view.bounds);
 		this.howManyItems = 0;
