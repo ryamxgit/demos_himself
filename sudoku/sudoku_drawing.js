@@ -17,6 +17,7 @@ var Sudoku = function() {
 		this.howManyItems = 0;
 		this.initBoard();
 		this.staticFilled = false;
+		paper.view.draw();
 	};
 	this.drawGridLines = function(num_rectangles_wide, num_rectangles_tall, stroke, boundingRect) {
 		this.width_per_rectangle = (boundingRect.width / num_rectangles_wide);
