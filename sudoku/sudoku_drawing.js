@@ -177,6 +177,7 @@ var Sudoku = function() {
 				i++;
 			}
 		}
+		this.setMsg('Numeros aleatorios iniciales...');
 	};
 	this.searchValidBoard = async function() {
 		var veces = 1;
@@ -189,10 +190,12 @@ var Sudoku = function() {
 			}
 			if(this.howManyItems < 81) {
 				console.log('No pudo resolver board '+veces);
+				this.setMsg('Tablero no es valido');
 				await sleep(500);
 				this.resetCanvas();
 			} else {
 				console.log('Un tablero encontrado!');
+				this.setMsg('Un tablero fue encontrado!');
 				veces = 10000;
 			}
 			veces++;
@@ -350,6 +353,9 @@ var Sudoku = function() {
 		this.putNumber(9,9,7);
 		this.putNumber(5,7,8);
 		this.putNumber(3,8,9);
+	};
+	this.setMsg = function(text) {
+		document.getElementById('msg').innerHTML = text;
 	};
 }
 
