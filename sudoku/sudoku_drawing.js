@@ -9,6 +9,7 @@ var Sudoku = function() {
 	this.staticFilled = false;
 	
 	this.resetCanvas = function() {
+		// Canvas reset (init of every cycle)
 		var bR = document.getElementById('sudokuZone');
 		var squa = new paper.Rectangle(0,0,bR.width,bR.height);
 		squa.fillColor = '#fff';
