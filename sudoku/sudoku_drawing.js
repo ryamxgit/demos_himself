@@ -169,7 +169,6 @@ var Sudoku = function() {
 			return;
 		}
 		for (var i=0; i<27;) {
-			console.log('Intentando obtener numero de vez:'+i);
 			var numArb = this.getRandomInt(1,10);
 			var position = this.getRandPosition();
 			if(this.asignUniqNumber(numArb, position)) {
