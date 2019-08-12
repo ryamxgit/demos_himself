@@ -178,7 +178,7 @@ var Sudoku = function() {
 			}
 		}
 	};
-	this.searchValidBoard = function() {
+	this.searchValidBoard = async function() {
 		var veces = 1;
 		while(veces < 10000) {
 			this.randomFilledTable();
@@ -190,6 +190,7 @@ var Sudoku = function() {
 			if(this.howManyItems < 81) {
 				console.log('No pudo resolver board '+veces);
 				this.resetCanvas();
+				await sleep(500);
 			} else {
 				console.log('Un tablero encontrado!');
 				veces = 10000;
