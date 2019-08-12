@@ -185,6 +185,7 @@ var Sudoku = function() {
 		}
 	};
 	this.searchValidBoard = async function() {
+		this.resetButton = false;
 		var veces = 1;
 		while(veces < 10000) {
 			this.randomFilledTable();
