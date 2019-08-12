@@ -19,6 +19,7 @@ var Sudoku = function() {
 		this.initBoard();
 		this.staticFilled = false;
 		paper.view.draw();
+		this.setMsg('Tablero reseteado');
 	};
 	this.drawGridLines = function(num_rectangles_wide, num_rectangles_tall, stroke, boundingRect) {
 		this.width_per_rectangle = (boundingRect.width / num_rectangles_wide);
@@ -201,14 +202,21 @@ var Sudoku = function() {
 		}
 	};
 	this.resolveBoard = function() {
+		this.setMsg('100 Ciclos para solucion...');
 		var veces = 1;
 		while(veces < 100) {
 			this.resolve();
 			veces++;
+			this.setMsg(100-veces+' Ciclos para solucion...');
 		}
 		if(this.howManyItems < 81) {
 			alert('No pudo resolver sudoku mediante Backtrack');
+			this.setMsg('No pudo resolver');
+		} else  {
+			this.setMsg('Sudoku fue resuelto');
 		}
+		
+		
 	};
 	this.resolve = function() {
 		var solutions = [];
@@ -257,6 +265,8 @@ var Sudoku = function() {
 		return false;
 	};
 	this.staticFilledTable = function() {
+		this.setMsg('Sudoku de periodico cargado');
+		
 		this.staticFilled = true;
 		this.initBoard();
 		this.putNumber(8,3,1);
@@ -352,6 +362,8 @@ var Sudoku = function() {
 		this.putNumber(9,9,7);
 		this.putNumber(5,7,8);
 		this.putNumber(3,8,9);
+		
+		
 	};
 	this.setMsg = function(text) {
 		document.getElementById('msg').innerHTML = text;
