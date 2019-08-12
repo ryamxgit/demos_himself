@@ -7,9 +7,13 @@ var Sudoku = function() {
 	this.howManyItems = 0;
 	this.errorUnresolved = false;
 	this.staticFilled = false;
-	
+	this.resetButton = false;
 	
 	this.resetCanvas = function() {
+		this.resetButton = true;
+		this.resetAll();
+	};
+	this.resetAll = function() {
 		// Canvas reset (init of every cycle)
 		var bR = document.getElementById('sudokuZone');
 		var square = new paper.Path.Rectangle({rectangle: paper.view.bounds, fillColor: 'white'});
@@ -20,7 +24,7 @@ var Sudoku = function() {
 		this.staticFilled = false;
 		paper.view.draw();
 		this.setMsg('Tablero reseteado');
-	};
+	}
 	this.drawGridLines = function(num_rectangles_wide, num_rectangles_tall, stroke, boundingRect) {
 		this.width_per_rectangle = (boundingRect.width / num_rectangles_wide);
 		this.height_per_rectangle = (boundingRect.height / num_rectangles_tall);
@@ -193,10 +197,14 @@ var Sudoku = function() {
 			if(this.howManyItems < 81) {
 				this.setMsg('Prueba '+veces+' no es sudoku valido');
 				await sleep(500);
-				this.resetCanvas();
+				this.resetAll();
 			} else {
 				this.setMsg('Un tablero fue encontrado en intento '+veces+'!');
 				veces = 10000;
+			}
+			if(this.resetButton) {
+				veces = 10000;
+				this.resetButton = false;
 			}
 			veces++;
 		}
