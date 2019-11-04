@@ -1,0 +1,105 @@
+
+<pre style="color:#000000;background:#ffffff;"><span style="color:#696969; ">#!</span><span style="color:#007997; ">/bin/bash</span>
+
+<span style="color:#696969; "># Some definitions</span>
+rm <span style="color:#44aadd; ">-f</span> <span style="color:#40015a; ">/tmp/etl_load.</span><span style="color:#808030; ">*</span>
+<span style="color:#797997; ">TMPF</span><span style="color:#808030; ">=</span><span style="color:#000000; background:#ffffe8; ">`mktemp </span><span style="color:#40015a; background:#ffffe8; ">/tmp/etl_load.XXXX</span><span style="color:#000000; background:#ffffe8; ">`</span>
+<span style="color:#797997; ">LOGFILE</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">"</span><span style="color:#40015a; ">/home/etl/log/output_etl.log</span><span style="color:#0000e6; ">"</span>
+<span style="color:#797997; ">WORKDIR</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">"</span><span style="color:#40015a; ">/home/workdir</span><span style="color:#0000e6; ">"</span>
+<span style="color:#797997; ">DATABASE</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">"db_example"</span>
+
+<span style="color:#696969; "># Register some texts as log of operation</span>
+<span style="color:#800000; font-weight:bold; ">function</span> trace <span style="color:#800080; ">{</span>
+   <span style="color:#bb7977; font-weight:bold; ">echo</span> <span style="color:#797997; ">$1</span> <span style="color:#e34adc; ">&gt;</span> <span style="color:#797997; ">$TMPF</span>
+   log
+<span style="color:#800080; ">}</span>
+
+<span style="color:#696969; "># Make permanent any trace of operation</span>
+<span style="color:#800000; font-weight:bold; ">function</span> log <span style="color:#800080; ">{</span>
+   <span style="color:#808030; ">[</span> <span style="color:#800000; font-weight:bold; ">!</span> <span style="color:#44aadd; ">-f</span> <span style="color:#797997; ">$TMPF</span> <span style="color:#808030; ">]</span> <span style="color:#800080; ">&amp;&amp;</span> <span style="color:#bb7977; font-weight:bold; ">return</span>
+   <span style="color:#797997; ">TLOG</span><span style="color:#808030; ">=</span><span style="color:#000000; background:#ffffe8; ">`date </span><span style="color:#0000e6; background:#ffffe8; ">"+%Y-%m-%d %H:%M:%S"</span><span style="color:#000000; background:#ffffe8; ">`</span>
+   awk <span style="color:#0000e6; ">'{printf "%s [%s] %s\n",t,p,$0}'</span> <span style="color:#797997; ">t</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">"</span><span style="color:#797997; ">$TLOG</span><span style="color:#0000e6; ">"</span> <span style="color:#797997; ">p</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">"</span><span style="color:#797997; ">$0</span><span style="color:#0000e6; ">"</span> <span style="color:#797997; ">$TMPF</span> <span style="color:#e34adc; ">&gt;</span><span style="color:#e34adc; ">&gt;</span> <span style="color:#797997; ">$LOGFILE</span>
+   rm <span style="color:#44aadd; ">-f</span> <span style="color:#797997; ">$TMPF</span>
+<span style="color:#800080; ">}</span>
+
+<span style="color:#696969; "># Call this with a "out" in 3rd param place, make error go out from bash</span>
+<span style="color:#800000; font-weight:bold; ">function</span> check_error <span style="color:#800080; ">{</span>
+log
+<span style="color:#800000; font-weight:bold; ">if</span> <span style="color:#808030; ">[</span> <span style="color:#797997; ">$1</span> <span style="color:#44aadd; ">!=</span> <span style="color:#008c00; ">0</span> <span style="color:#808030; ">]</span>
+<span style="color:#800000; font-weight:bold; ">then</span>
+   <span style="color:#bb7977; font-weight:bold; ">echo</span> <span style="color:#0000e6; ">"Error </span><span style="color:#797997; ">$1</span><span style="color:#0000e6; "> </span><span style="color:#797997; ">$2</span><span style="color:#0000e6; ">"</span>
+   mail <span style="color:#44aadd; ">-s</span> <span style="color:#0000e6; ">"Error </span><span style="color:#797997; ">$1</span><span style="color:#0000e6; "> </span><span style="color:#797997; ">$2</span><span style="color:#0000e6; "> en </span><span style="color:#797997; ">$0</span><span style="color:#0000e6; ">"</span> root@localhost <span style="color:#e34adc; ">&lt;</span> <span style="color:#797997; ">$TMPF</span>
+   <span style="color:#808030; ">[</span> <span style="color:#800000; font-weight:bold; ">!</span> <span style="color:#44aadd; ">-z</span> <span style="color:#797997; ">$3</span> <span style="color:#808030; ">]</span> <span style="color:#800080; ">&amp;&amp;</span> <span style="color:#800000; font-weight:bold; ">if</span> <span style="color:#808030; ">[</span> <span style="color:#797997; ">$3</span> <span style="color:#44aadd; ">==</span> <span style="color:#0000e6; ">"out"</span> <span style="color:#808030; ">]</span>
+   <span style="color:#800000; font-weight:bold; ">then</span>
+     <span style="color:#bb7977; font-weight:bold; ">exit</span> <span style="color:#008c00; ">1</span>
+   <span style="color:#800000; font-weight:bold; ">fi</span>
+<span style="color:#800000; font-weight:bold; ">fi</span>
+
+<span style="color:#800080; ">}</span>
+
+<span style="color:#696969; ">#</span>
+<span style="color:#696969; "># Section "EXPORT"</span>
+<span style="color:#696969; ">#</span>
+
+<span style="color:#797997; ">IFACE0</span><span style="color:#808030; ">=</span>FILE_EXP1<span style="color:#800000; font-weight:bold; ">.</span>txt
+<span style="color:#797997; ">IFACE1</span><span style="color:#808030; ">=</span>FILE_EXP2<span style="color:#800000; font-weight:bold; ">.</span>txt
+
+<span style="color:#696969; "># Getting export files from some systems</span>
+<span style="color:#696969; "># Call any copy or UNLOAD or EXPORT</span>
+
+
+<span style="color:#696969; "># Validate files</span>
+<span style="color:#808030; ">[</span> <span style="color:#44aadd; ">-f</span> <span style="color:#797997; ">${</span>IFACE0<span style="color:#797997; ">}</span> <span style="color:#808030; ">]</span> <span style="color:#800080; ">||</span> check_error <span style="color:#008c00; ">1</span> <span style="color:#0000e6; ">"Doesn't exist </span><span style="color:#797997; ">${IFACE0}</span><span style="color:#0000e6; "> export file"</span> <span style="color:#0000e6; ">"out"</span>
+<span style="color:#808030; ">[</span> <span style="color:#44aadd; ">-f</span> <span style="color:#797997; ">${</span>IFACE1<span style="color:#797997; ">}</span> <span style="color:#808030; ">]</span> <span style="color:#800080; ">||</span> check_error <span style="color:#008c00; ">1</span> <span style="color:#0000e6; ">"Doesn't exist </span><span style="color:#797997; ">${IFACE1}</span><span style="color:#0000e6; "> export file"</span> <span style="color:#0000e6; ">"out"</span>
+
+<span style="color:#696969; ">#</span>
+<span style="color:#696969; "># Section "TRANSFORM"</span>
+<span style="color:#696969; ">#</span>
+trace <span style="color:#0000e6; ">"Editing some portions on every file"</span>
+<span style="color:#bb7977; font-weight:bold; ">sed</span> -i <span style="color:#0000e6; ">"</span><span style="color:#800000; font-weight:bold; ">s</span><span style="color:#800000; ">/</span><span style="color:#800080; ">|</span><span style="color:#808030; ">$</span><span style="color:#800000; ">/</span><span style="color:#800000; ">/</span><span style="color:#800000; font-weight:bold; ">g</span><span style="color:#0000e6; ">"</span> <span style="color:#797997; ">$IFACE0</span> 
+<span style="color:#bb7977; font-weight:bold; ">sed</span> -i <span style="color:#0000e6; ">"</span><span style="color:#800000; font-weight:bold; ">s</span><span style="color:#800000; ">/</span><span style="color:#800080; ">|</span><span style="color:#808030; ">$</span><span style="color:#800000; ">/</span><span style="color:#800000; ">/</span><span style="color:#800000; font-weight:bold; ">g</span><span style="color:#0000e6; ">"</span> <span style="color:#797997; ">$IFACE1</span>
+<span style="color:#bb7977; font-weight:bold; ">sed</span> -i <span style="color:#0000e6; ">"</span><span style="color:#800000; font-weight:bold; ">s</span><span style="color:#800000; ">/</span><span style="color:#800080; ">|</span><span style="color:#0000e6; ">A</span><span style="color:#800080; ">|</span><span style="color:#800000; ">/</span><span style="color:#0000e6; ">|1|</span><span style="color:#800000; ">/</span><span style="color:#800000; font-weight:bold; ">g</span><span style="color:#0000e6; ">"</span> <span style="color:#797997; ">$IFACE1</span>
+<span style="color:#bb7977; font-weight:bold; ">sed</span> -i <span style="color:#0000e6; ">"</span><span style="color:#800000; font-weight:bold; ">s</span><span style="color:#800000; ">/</span><span style="color:#800080; ">|</span><span style="color:#0000e6; ">I</span><span style="color:#800080; ">|</span><span style="color:#800000; ">/</span><span style="color:#0000e6; ">|0|</span><span style="color:#800000; ">/</span><span style="color:#800000; font-weight:bold; ">g</span><span style="color:#0000e6; ">"</span> <span style="color:#797997; ">$IFACE1</span>
+<span style="color:#bb7977; font-weight:bold; ">sed</span> -i <span style="color:#0000e6; ">"</span><span style="color:#800000; font-weight:bold; ">s</span><span style="color:#800000; ">/</span><span style="color:#0000e6; ">S</span><span style="color:#808030; ">$</span><span style="color:#800000; ">/</span><span style="color:#0000e6; ">1</span><span style="color:#800000; ">/</span><span style="color:#800000; font-weight:bold; ">g</span><span style="color:#0000e6; ">"</span> <span style="color:#797997; ">$IFACE1</span>
+<span style="color:#bb7977; font-weight:bold; ">sed</span> -i <span style="color:#0000e6; ">"</span><span style="color:#800000; font-weight:bold; ">s</span><span style="color:#800000; ">/</span><span style="color:#0000e6; ">N</span><span style="color:#808030; ">$</span><span style="color:#800000; ">/</span><span style="color:#0000e6; ">0</span><span style="color:#800000; ">/</span><span style="color:#800000; font-weight:bold; ">g</span><span style="color:#0000e6; ">"</span> <span style="color:#797997; ">$IFACE1</span>
+
+
+<span style="color:#696969; ">#</span>
+<span style="color:#696969; "># Section "LOAD"</span>
+<span style="color:#696969; ">#</span>
+
+
+<span style="color:#696969; "># Execute load on postgres</span>
+psql <span style="color:#44aadd; ">-a</span> <span style="color:#44aadd; ">-d</span> <span style="color:#797997; ">$DATABASE</span> &amp;<span style="color:#e34adc; ">&gt;</span><span style="color:#797997; ">$TMPF</span> <span style="color:#e34adc; ">&lt;</span><span style="color:#e34adc; ">&lt;</span><span style="color:#800000; font-weight:bold; ">!</span>
+<span style="color:#0f69ff; ">\s</span>et ON_ERROR_STOP <span style="color:#008c00; ">1</span>
+BEGIN<span style="color:#800080; ">;</span>
+  TRUNCATE TABLE load_table1 CASCADE<span style="color:#800080; ">;</span>
+  TRUNCATE TABLE load_table2 CASCADE<span style="color:#800080; ">;</span>
+  
+
+  COPY  load_table1<span style="color:#800080; ">(</span>field1, field2, field3<span style="color:#800080; ">)</span>
+   FROM <span style="color:#0000e6; ">'${WORKDIR}/$IFACE0'</span>
+   WITH CSV<span style="color:#800080; ">;</span>
+
+  COPY  load_table2<span style="color:#800080; ">(</span>field1, field2, field3<span style="color:#800080; ">)</span>
+   FROM <span style="color:#0000e6; ">'${WORKDIR}/$IFACE1'</span>
+   WITH CSV<span style="color:#800080; ">;</span>
+
+COMMIT<span style="color:#800080; ">;</span>
+<span style="color:#800000; font-weight:bold; ">!</span>
+check_error <span style="color:#797997; ">$?</span> <span style="color:#0000e6; ">"Load export files"</span> <span style="color:#0000e6; ">"out"</span>
+
+
+
+<span style="color:#696969; "># Save historical files</span>
+<span style="color:#797997; ">DATE</span><span style="color:#808030; ">=</span><span style="color:#000000; background:#ffffe8; ">`date +%Y%m%d`</span>
+cat <span style="color:#797997; ">$IFACE0</span> <span style="color:#e34adc; ">|</span> gzip -<span style="color:#008c00; ">9</span> <span style="color:#e34adc; ">&gt;</span> <span style="color:#797997; ">${</span>IFACE0<span style="color:#797997; ">}</span>-<span style="color:#797997; ">${</span>DATE<span style="color:#797997; ">}</span><span style="color:#800000; font-weight:bold; ">.</span>gz
+cat <span style="color:#797997; ">$IFACE1</span> <span style="color:#e34adc; ">|</span> gzip -<span style="color:#008c00; ">9</span> <span style="color:#e34adc; ">&gt;</span> <span style="color:#797997; ">${</span>IFACE1<span style="color:#797997; ">}</span>-<span style="color:#797997; ">${</span>DATE<span style="color:#797997; ">}</span><span style="color:#800000; font-weight:bold; ">.</span>gz
+
+rm <span style="color:#44aadd; ">-f</span> <span style="color:#797997; ">$IFACE0</span> <span style="color:#797997; ">$IFACE1</span>
+
+<span style="color:#696969; "># Delete historical files with more than 1 month</span>
+find <span style="color:#797997; ">$SPOOL</span> -name <span style="color:#0000e6; ">"*.gz"</span> -ctime +<span style="color:#008c00; ">30</span> -<span style="color:#bb7977; font-weight:bold; ">exec</span> rm <span style="color:#44aadd; ">-f</span> <span style="color:#800080; ">{</span><span style="color:#800080; ">}</span> <span style="color:#0f69ff; ">\;</span>
+
+trace <span style="color:#0000e6; ">"End of ETL operation"</span>
+</pre>
