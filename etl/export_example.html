@@ -1,0 +1,18 @@
+
+<pre style="color:#000000;background:#ffffff;"><span style="color:#696969; ">#!</span><span style="color:#007997; ">/bin/bash</span>
+
+<span style="color:#797997; ">WORKDIR</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">"</span><span style="color:#40015a; ">/home/workdir</span><span style="color:#0000e6; ">"</span>
+<span style="color:#797997; ">DATABASE</span><span style="color:#808030; ">=</span><span style="color:#0000e6; ">"db_example"</span>
+
+<span style="color:#797997; ">DATE</span><span style="color:#808030; ">=</span><span style="color:#000000; background:#ffffe8; ">`date +%Y%m%d`</span>
+
+psql <span style="color:#44aadd; ">-a</span> <span style="color:#44aadd; ">-d</span> <span style="color:#797997; ">$DATABASE</span> &amp;<span style="color:#e34adc; ">&gt;</span><span style="color:#797997; ">$TMPF</span> <span style="color:#e34adc; ">&lt;</span><span style="color:#e34adc; ">&lt;</span><span style="color:#800000; font-weight:bold; ">!</span>
+
+COPY <span style="color:#800080; ">(</span>SELECT <span style="color:#808030; ">*</span> FROM tbl<span style="color:#800080; ">)</span> 
+TO <span style="color:#0000e6; ">'$WORKDIR/result_sql_$DATE.csv'</span> 
+WITH CSV HEADER<span style="color:#800080; ">;</span>
+
+<span style="color:#800000; font-weight:bold; ">!</span>
+
+<span style="color:#bb7977; font-weight:bold; ">echo</span> <span style="color:#0000e6; ">"Export finished"</span>
+</pre>
