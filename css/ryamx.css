@@ -14,5 +14,9 @@ h4 {
 .container {
 	width: 400px;
 	background-color: #000;
-	opacity: 40%;
+}
+
+.container::before {
+	z-index: -1;
+	opacity: 50%;
 }
