@@ -13,7 +13,7 @@ h4 {
 
 .container {
 	width: 400px;
-	background-color: #000;
+	background-color: rgba(0,0,0,.5);
 }
 
 .container::before {
