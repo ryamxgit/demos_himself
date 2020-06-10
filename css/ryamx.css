@@ -3,17 +3,20 @@ body {
 }
 
 h1 {
+	color: var(--orange);
 	margin-top:40px;
 	/* text-shadow: -2px 2px 0 #fff, -6px 7px 0 #0a0e27; */
 }
 
 h4 {
+	color: var(--orange);
 	/* text-shadow: -2px 2px 0 #fff, -6px 7px 0 #0a0e27; */
 }
 
 .container {
 	background-color: rgba(0,0,0,.5);
 	margin-left: 30px;
+	color: #20f72b;
 }
 
 .container::before {
