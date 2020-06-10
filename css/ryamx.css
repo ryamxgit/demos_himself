@@ -19,6 +19,10 @@ h4 {
 	color: #20f72b;
 }
 
+.container < a {
+	color: #20f72b;
+}
+
 .container::before {
 	z-index: -1;
 	opacity: 50%;
