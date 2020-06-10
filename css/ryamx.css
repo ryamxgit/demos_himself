@@ -21,6 +21,7 @@ h4 {
 
 .container a {
 	color: #20f72b;
+	text-shadow: -1px 1px #002404;
 }
 
 .container::before {
