@@ -8,12 +8,12 @@ function draw() {
 	translate(width/2, height/2);
 	stroke(255);
 	strokeWeight(5);
-	var lenght = 400;
+	var lenght = 300;
 	for(var i=0; i<280; i+=10) {
 		push();
 		rotate(radians(i)*
 				cos(radians(angle)));
-		line(length*sin(radians(angle)),0,0,length);
+		line(200*sin(radians(angle)),0,0,length);
 		pop();
 	}
 	angle++;
