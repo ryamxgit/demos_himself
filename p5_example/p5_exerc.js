@@ -6,15 +6,19 @@ function setup() {
 function draw() {
 	background(0);
 	translate(width/2, height/2);
-	stroke(255);
-	strokeWeight(3);
+	strokeWeight(1);
 	var lenght = 400;
+	var flag = true;
 	for(var i=0; i<280; i+=10) {
+		if(flag)
+			stroke(255);
+		else
+			stroke(89);
 		push();
-		rotate(radians(i)*
-				cos(radians(angle)));
+		rotate(radians(i)*cos(radians(angle)));
 		line(200*sin(radians(angle)),0,0,200);
 		pop();
+		flag = !flag;
 	}
 	angle++;
 }
