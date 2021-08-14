@@ -1,6 +1,6 @@
 var angle = 90;
 function setup() {
-	size(900,900);
+	createCanvas(900,900);
 }
 
 function draw() {
@@ -9,11 +9,11 @@ function draw() {
 	stroke(255);
 	strokeWeight(3);
 	for(var i=0; i<280; i+=10) {
-		pushMatrix();
+		push();
 		rotate(radians(i)*
 				cos(radians(angle)));
 		line(200*sin(radians(angle)),0,0,200);
-		popMatrix();
+		pop();
 	}
 	angle++;
 }
