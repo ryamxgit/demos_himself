@@ -13,7 +13,7 @@ function draw() {
 		push();
 		rotate(radians(i)*
 				cos(radians(angle)));
-		line(length*sin(radians(angle)),0,0,200);
+		line(200*sin(radians(angle)),0,0,200);
 		pop();
 	}
 	angle++;
