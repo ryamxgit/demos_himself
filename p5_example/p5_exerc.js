@@ -13,7 +13,7 @@ function draw() {
 		if(flag)
 			stroke(255);
 		else
-			stroke(89);
+			stroke('yellow');
 		push();
 		rotate(radians(i)*cos(radians(angle)));
 		line(200*sin(radians(angle)),0,0,200);
