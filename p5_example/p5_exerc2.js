@@ -4,7 +4,7 @@ function setup() {
 	noStroke();
 	background(0);
   
-	shaderProg = createShader("vertex_file.js", "segment_file.js");
+	shaderProg = createShader("/p5_example/vertex_file.js", "/p5_example/segment_file.js");
 }
 
 function draw() {
