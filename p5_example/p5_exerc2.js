@@ -1,10 +1,10 @@
 var angle = 90;
+float i, e, R, s;
 function setup() {
 	createCanvas(1800,900);
 }
 
 function draw() {
-	float i, e, R, s;
 	vec3 q, p, d = vec3((r - FC.xy * (3. - sin(t * .5))) / r.y, 2);
 	for (q.zy--; i++ < 89.;) {
 		e += i / 4e3;
