@@ -39,7 +39,7 @@ const FRAGMENT_SOURCE = [
 
 
 function setup() {
-	createCanvas(1500,700, WEBGL);
+	createCanvas(1280,720, WEBGL);
 	noStroke();
 	background(0);
   
