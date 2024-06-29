@@ -50,7 +50,7 @@ function draw() {
 	shader(shaderProg);
   
 	shaderProg.setUniform("resolution", [width, height]);
-	shaderProg.setUniform('time', millis() / 1000.0);
+	shaderProg.setUniform('time', millis() / 800.0);
   
 	quad(-1, -1, 1, -1, 1, 1, -1, 1);
 }
