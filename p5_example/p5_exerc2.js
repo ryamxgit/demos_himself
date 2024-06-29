@@ -1,7 +1,7 @@
 var angle = 90;
 float i, e, R, s;
 function setup() {
-	createCanvas(1800,900);
+	createCanvas(1800,900, WEBGL);
 }
 
 function draw() {
