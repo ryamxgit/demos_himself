@@ -1,18 +1,17 @@
-var angle = 90;
-var i, e, R, s;
+
 function setup() {
 	createCanvas(1800,900, WEBGL);
+	noStroke();
+	background(0);
+  
+	shaderProg = createShader("vertex_file.js", "segment_file.js");
 }
 
 function draw() {
-	vec3 q, p, d = vec3((r - FC.xy * (3. - sin(t * .5))) / r.y, 2);
-	for (q.zy--; i++ < 89.;) {
-		e += i / 4e3;
-		o.rgb += hsv(.1, e, R * i * e / 179.);
-		s = 1.1;
-		p = q += d * e * R * .06;
-		p = vec3(log2(R = length(p)) - t * .5, exp(-p.z / R), atan(p.y, p.x));
-		for (e = --p.y; s < 8e2; s += s)
-			e += .1 - abs(dot(cos(p.zxy * s), cos(p * s)) / s * .8);
-	}
+	shader(shaderProg);
+  
+	shaderProg.setUniform("resolution", [width, height]);
+	shaderProg.setUniform('time', millis() / 1000.0);
+  
+	quad(-1, -1, 1, -1, 1, 1, -1, 1);
 }
