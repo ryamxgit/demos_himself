@@ -17,9 +17,11 @@
 }
 </style>
 <script type="text/javascript">
-$("#candado").on('click', function() {
-        alert("Hola");
-});
+const button = document.getElementById("candado");
+button.onclick = function(event) {
+   alert("Ha clickeado candado");
+}
+
 </script>
 </head>
 <body>
