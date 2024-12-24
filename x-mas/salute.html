@@ -29,12 +29,18 @@
 const button = document.getElementById("candado");
 button.onclick = function(event) {
    msj = window.prompt("Introduzca la password:");
-   if(msj.lower() == 'eldenbeast') {
+   if(msj.toLowerCase() == 'eldenbeast') {
        mostrar_regalo();
    } else {
        alert('Lo sentimos, esa no es la password correcta');
    }
    
+}
+function mostrar_regalo() {
+	var i1 = document.getElementById("normal");
+	var i2 = document.getElementById("closed_gift");
+	i1.style.display = "none";
+	i2.style.display = "block";
 }
 
 </script>
