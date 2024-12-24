@@ -28,7 +28,7 @@
 <script type="text/javascript">
 const button = document.getElementById("candado");
 button.onclick = function(event) {
-   msj = input("Introduzca la password:");
+   msj = window.prompt("Introduzca la password:");
    if(msj.lower() == 'eldenbeast') {
        mostrar_regalo();
    } else {
