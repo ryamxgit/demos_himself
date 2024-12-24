@@ -20,7 +20,7 @@
 </head>
 <body>
 <div id="normal">
-<h1>Oh oh!</h1>
+<h1>Acceso</h1>
 <img id="candado" src="/imgs/locked_site.jpg" />
 </div>
 <div id="closed_gift">
@@ -28,12 +28,20 @@
 </div>
 <script type="text/javascript">
 const button = document.getElementById("candado");
+function make_password() {
+	t5 = 'e';
+	t8 = 'b';
+	t10 = 'l';
+	t12 = 'd';
+	t15 = 's';
+	return t5+t10+t12+t5+'n'+t8+t5+'a'+t15+'t';
+}
 button.onclick = function(event) {
    msj = window.prompt("Introduzca la password:");
-   if(msj.toLowerCase() == 'eldenbeast') {
+   if(msj.toLowerCase() == make_password()) {
        mostrar_regalo();
    } else {
-       alert('Lo sentimos, esa no es la password correcta');
+       alert('Acceso denegado');
    }
    
 }
