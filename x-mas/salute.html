@@ -28,7 +28,13 @@
 <script type="text/javascript">
 const button = document.getElementById("candado");
 button.onclick = function(event) {
-   alert("Ha clickeado candado");
+   msj = confirm("Introduzca la password:");
+   if(msj.lower() == 'eldenbeast') {
+       mostrar_regalo();
+   } else {
+       alert('Lo sentimos, esa no es la password correcta');
+   }
+   
 }
 
 </script>
